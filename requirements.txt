@@ -1,0 +1,3 @@
+py2exe
+requests
+dotenv
