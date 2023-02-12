@@ -1,8 +1,12 @@
 import os
 import ScoreForger
 
+verhash = ScoreForger.md5(f"{ScoreForger.get_osu_runtime_dir()}/osu.Game.dll")
+
+print("Using verhash: " + verhash)
+
 sc = ScoreForger.ScoreForger(
-    os.environ['OSU_USERNAME'], os.environ['OSU_PASSWORD'], os.environ['OSU_VERHASH'])
+    os.environ['OSU_USERNAME'], os.environ['OSU_PASSWORD'], verhash)
 
 scoredata = ScoreForger.ScoreData(
     ScoreForger.RuleSets.STANDARD,
@@ -11,7 +15,7 @@ scoredata = ScoreForger.ScoreData(
     "1.0",
     ScoreForger.bit16limit,
     ScoreForger.Ranks.SSH,
-    ScoreForger.BuildModsArray("HD", "DT", "HR", "FL", "PF"),
+    ScoreForger.BuildModsArray("HD", "DT", "HR", "FL"),
     {
         "miss": 0,
         "ok": 0,

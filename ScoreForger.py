@@ -1,5 +1,7 @@
 import requests
 import random
+import hashlib
+import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -176,3 +178,29 @@ class ScoreForger:
             return r.json()
         else:
             raise Exception('Message sending failed: ' + r.text)
+
+
+def md5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
+
+def get_osu_runtime_dir():
+    winusername = os.getlogin()
+
+    base_directory = "C:\\Users\\" + winusername + "\\AppData\\Local\\osulazer\\"
+
+    if not os.path.exists(base_directory):
+        print("osu!lazer directory not found!")
+        exit(1)
+
+    directory = os.listdir(base_directory)
+    directory.sort(key=lambda x: os.path.getmtime(base_directory + x))
+    directory = [x for x in directory if "packages" not in x]
+    directory = [x for x in directory if os.path.isdir(base_directory + x)]
+    directory = directory[-1]
+
+    return base_directory + directory
