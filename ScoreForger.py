@@ -5,8 +5,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# versionhash: 6bdb52cccf7f0fb48fac2f4a4f446f24
-
 bit32limit = 2147483647
 bit16limit = 65535
 bit8limit = 255
