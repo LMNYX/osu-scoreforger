@@ -2,6 +2,8 @@
 
 A tool to create scores on lazer in osu!
 
+See [GUI version](https://github.com/LMNYX/osu-scoreforger-gui) for a more user-friendly experience.
+
 > ⚠ **Warning:** Anything you do is your own responsibility, using it is considered cheating. Please use it only for educational purposes.
 
 ## Installation
