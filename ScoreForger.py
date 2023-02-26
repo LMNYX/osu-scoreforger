@@ -75,6 +75,33 @@ class ScoreData:
 
         self.data = data
 
+DefaultValues = {
+    "statistics": {
+        "miss": 0,
+        "ok": 0,
+        "great": 123,
+        "small_tick_miss": 0,
+        "small_tick_hit": 0,
+        "large_tick_hit": 0,
+        "small_bonus": 0,
+        "large_bonus": 0,
+        "ignore_miss": 0,
+        "ignore_hit": 0
+    }
+}
+
+def CreateScoreData(ruleset:RuleSets=RuleSets.STANDARD, passstate:PassState=PassState.PASS, total_score:int=1000, accuracy:str="1", max_combo:int=123, rank:Ranks=Ranks.SS, mods:list[object]=BuildModsArray(), statistics:object=DefaultValues["statistics"]) -> ScoreData:
+    maximum_statistics = {
+        "great": statistics['great'],
+        "small_tick_hit": statistics['small_tick_hit'],
+        "large_tick_hit": statistics['large_tick_hit'],
+        "small_bonus": statistics['small_bonus'],
+        "large_bonus": statistics['large_bonus'],
+        "ignore_miss": statistics['ignore_miss'],
+        "ignore_hit": statistics['ignore_hit']
+    }
+    score = ScoreData(ruleset, passstate, score, accuracy, max_combo, rank, mods, statistics, maximum_statistics)
+    return score
 
 class ScoreForger:
 
