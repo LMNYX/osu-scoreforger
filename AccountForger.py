@@ -5,6 +5,7 @@ import string
 
 class AccountForger:
     def __init__(self):
+        pass
 
     def random_string(self):
         return ''.join(random.choice(string.ascii_letters) for i in range(8))
@@ -58,3 +59,8 @@ class AccountForger:
             return {"username": username, "password": password, "email": email, "oauth": oauth}
         else:
             return None
+
+
+ac = AccountForger()
+x = ac.forge_random()
+print(x)
