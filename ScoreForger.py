@@ -100,7 +100,7 @@ def CreateScoreData(ruleset:RuleSets=RuleSets.STANDARD, passstate:PassState=Pass
         "ignore_miss": statistics['ignore_miss'],
         "ignore_hit": statistics['ignore_hit']
     }
-    score = ScoreData(ruleset, passstate, score, accuracy, max_combo, rank, mods, statistics, maximum_statistics)
+    score = ScoreData(ruleset, passstate, total_score, accuracy, max_combo, rank, mods, statistics, maximum_statistics)
     return score
 
 class ScoreForger:
