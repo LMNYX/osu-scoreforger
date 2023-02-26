@@ -105,7 +105,7 @@ def CreateScoreData(ruleset:RuleSets=RuleSets.STANDARD, passstate:PassState=Pass
 
 class ScoreForger:
 
-    def __init__(self, login, password, version_hash):
+    def __init__(self, login:str, password:str, version_hash:str) -> None:
         self.version_hash = version_hash
         self.client_id = 5
         self.client_secret = 'FGc9GAtyHzeQDshWP5Ah7dega8hJACAJpQtw6OXk'
@@ -113,7 +113,7 @@ class ScoreForger:
         self.password = password
         self.token = self.auth(login, password)
 
-    def auth(self, login, password):
+    def auth(self, login:str, password:str) -> object:
         data_headers = {"charset": "utf-8"}
         data = {
             "username": (None, login, "text/plain", data_headers),
@@ -130,7 +130,7 @@ class ScoreForger:
         else:
             raise Exception('Auth failed: ' + r.text)
 
-    def get_beatmap(self, beatmap_id):
+    def get_beatmap(self, beatmap_id:int):
         data_headers = {
             "charset": "utf-8",
             "Authorization": "Bearer " + self.token,
@@ -147,7 +147,7 @@ class ScoreForger:
         else:
             raise Exception('Beatmap dump failed: ' + r.text)
 
-    def create_score(self, beatmap_id, ruleset_id):
+    def create_score(self, beatmap_id:int, ruleset_id:int) -> object:
         ez_headers = {"charset": "utf-8"}
         data_headers = {
             "charset": "utf-8",
@@ -174,7 +174,7 @@ class ScoreForger:
             raise Exception('Score creation failed: ' +
                             f"[{r.status_code}]" + r.text)
 
-    def submit_score(self, score, scoredata):
+    def submit_score(self, score, scoredata:ScoreData) -> object:
         data_headers = {
             "charset": "utf-8",
             "Authorization": "Bearer " + self.token,
@@ -191,18 +191,6 @@ class ScoreForger:
             return r.json()
         else:
             raise Exception('Submission failed: ' + r.text)
-
-    def send_message(self, user_id, message):
-        data_headers = {
-            "charset": "utf-8", "Authorization": "Bearer " + self.token, "User-Agent": "osu!", "Accept": "application/json", 'Cookie': 'INGRESSCOOKIE=1672208432.33.39.918840|3895cf8eddf4633e9068ff729427d3e6'}
-        data = {"message": message}
-        r = requests.post('https://osu.ppy.sh/api/v2/chat/users/' +
-                          str(user_id) + '/new', json=data, headers=data_headers)
-
-        if r.status_code == 200:
-            return r.json()
-        else:
-            raise Exception('Message sending failed: ' + r.text)
 
 
 def md5(fname):
